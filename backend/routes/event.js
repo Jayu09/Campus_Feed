@@ -2,7 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 require("../passport");
 const JWTStrategy = passport.authenticate("jwt", { session: false });
-const adminControllers = require("../controllers/AdminController");
+const eventControllers = require("../controllers/eventControllers");
 const multer = require("multer");
 
 const Storage = multer.diskStorage({
@@ -21,5 +21,13 @@ const upload = multer({
   }
 });
 
-router.post("/addAdmin", JWTStrategy, adminControllers.addAdmin);
+router.post(
+  "/addEvent",
+  JWTStrategy,
+  upload.single("image"),
+  eventControllers.createEvent
+);
+router.get("/getEvent", JWTStrategy, eventControllers.getEvent);
+
+router.put("/approveEvent", JWTStrategy, eventControllers.approveEvent);
 module.exports = router;

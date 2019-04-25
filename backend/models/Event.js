@@ -27,9 +27,14 @@ const Event = new schema({
     type: String,
     require: true
   },
-  Compulsary_for: {
+  Compulsory_for: {
     type: Array,
     default: []
+  },
+  Approved: {
+    type: Boolean,
+    require: true,
+    default: false
   }
 });
 

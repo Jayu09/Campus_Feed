@@ -22,5 +22,4 @@ const upload = multer({
 });
 
 router.post("/addFaculty", JWTStrategy, facultyControllers.addFaculty);
-
 module.exports = router;

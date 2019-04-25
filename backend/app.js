@@ -9,6 +9,7 @@ const users = require("./routes/users");
 const admin = require("./routes/admin");
 const students = require("./routes/Student");
 const faculty = require("./routes/faculty");
+const events = require("./routes/event");
 const db = require("./config/keys").URI;
 const app = express();
 //database connectivity
@@ -42,6 +43,7 @@ app.use("/users", users);
 app.use("/users/admin", admin);
 app.use("/users/students", students);
 app.use("/users/faculty", faculty);
+app.use("/event", events);
 //port declaration
 const Port = process.env.PORT || 3010;
 app.listen(Port);
