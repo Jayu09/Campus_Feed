@@ -5,7 +5,10 @@ module.exports = {
   addStudent: async (req, res, done) => {
     var user = await users.findOne({ _id: req.user._id });
     var newStudent = new student(req.body);
-    if (user.Type === "admin" && user) {
+    if (
+      ((user.Type === "admin" && user) || user.Type === "SuperAdmin") &&
+      newAdmin.Type === "Student"
+    ) {
       await newStudent
         .save()
         .then(st => {

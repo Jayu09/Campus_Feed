@@ -1,10 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
 require("../passport");
-const { validateUser, schemas } = require("../helpers/schemaHelpers");
-const passAuth = passport.authenticate("local", { session: false });
 const JWTStrategy = passport.authenticate("jwt", { session: false });
-const studentControllers = require("../controllers/StudentControllers");
+const facultyControllers = require("../controllers/FacultyController");
 const multer = require("multer");
 
 const Storage = multer.diskStorage({
@@ -23,6 +21,6 @@ const upload = multer({
   }
 });
 
-router.post("/verifyStudent", JWTStrategy, studentControllers.addStudent);
+router.post("/addFaculty", JWTStrategy, facultyControllers.addFaculty);
 
 module.exports = router;

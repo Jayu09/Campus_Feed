@@ -1,10 +1,13 @@
 const admin = require("../models/Admin");
-
+const users = require("../models/users");
 module.exports = {
   addAdmin: async (req, res, done) => {
     var user = await users.findOne({ _id: req.user._id });
     var newAdmin = new admin(req.body);
-    if ((user.Type === "admin" && user) || user.Type === "SuperAdmin") {
+    if (
+      ((user.Type === "admin" && user) || user.Type === "SuperAdmin") &&
+      newAdmin.Type === "Admin"
+    ) {
       await newAdmin
         .save()
         .then(st => {

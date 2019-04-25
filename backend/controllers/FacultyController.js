@@ -1,10 +1,13 @@
 const faculty = require("../models/Faculty");
-
+const users = require("../models/users");
 module.exports = {
   addFaculty: async (req, res, done) => {
     var user = await users.findOne({ _id: req.user._id });
     var newFaculty = new faculty(req.body);
-    if (user.Type === "admin" && user) {
+    if (
+      ((user.Type === "admin" && user) || user.Type === "SuperAdmin") &&
+      newAdmin.Type === "Faculty"
+    ) {
       await newFaculty
         .save()
         .then(st => {

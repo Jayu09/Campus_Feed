@@ -5,7 +5,8 @@ const user = require("./users");
 const faculty = new schema({
   Id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: user
+    ref: user,
+    unique: true
   },
   FatherName: {
     type: String,
