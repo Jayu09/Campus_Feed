@@ -3,20 +3,24 @@ const schema = mongoose.Schema;
 const user = require("./users");
 
 const Event = new schema({
-  Created_By: {
+  AuthId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: user
+  },
+  Created_By: {
+    type: String,
+    require: true
   },
   title: {
     type: String,
     require: true
   },
-  Date: {
+  Date_Time: {
     type: Date,
     require: true
   },
   Time: {
-    type: TimeRanges,
+    type: Number,
     require: true
   },
   venue: {
