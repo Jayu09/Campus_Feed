@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
+//Component Import
+import Home from "./component/Home";
 
 class App extends Component {
   render() {
@@ -27,12 +29,31 @@ class App extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
+          <nav className="nav navbar-nav mr-auto ">
+            <ul class="navbar-nav mr-auto">
+              <li>
+                <a className="nav-link active" href="/TimeTable">
+                  Time Table
+                </a>
+              </li>
+              <li>
+                <a className="nav-link active" href="/Syllabus">
+                  Syllabus
+                </a>
+              </li>
+              <li>
+                <a className="nav-link active" href="/CourseStatus">
+                  Course Status
+                </a>
+              </li>
+            </ul>
+          </nav>
+
           <nav className="nav navbar-nav ml-auto ">
             <ul class="navbar-nav mr-auto">
               <li className="btn btn-outline-primary">Sign In</li>
             </ul>
           </nav>
-          <nav className="nav" />
         </nav>
         <div className="container-fluid p-0">
           <div className="row">

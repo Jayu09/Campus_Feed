@@ -4,19 +4,19 @@
 
 .App-logo {
   height: 5vmin;
-  width:5vmin;
+  width: 5vmin;
   pointer-events: none;
 }
-.menu{
+.menu {
   height: 100vmin;
-  background-color: blue;
+  background-color: #f0fff0;
 }
-.menu1{
+.menu1 {
   height: 20vmin;
 }
 .App-header {
-  background-color: #282c34;
-  }
+  background-color: #e6e6fa;
+}
 
 .App-link {
   color: #61dafb;
