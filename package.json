@@ -1,0 +1,22 @@
+{
+  "name": "campus_feed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jayu09/Campus_Feed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jayu09/Campus_Feed/issues"
+  },
+  "homepage": "https://github.com/Jayu09/Campus_Feed#readme",
+  "dependencies": {
+    "npm": "^6.9.0"
+  }
+}
