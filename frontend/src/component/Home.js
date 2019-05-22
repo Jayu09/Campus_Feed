@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+//import Show from "./Show";
+import PostForm from "../container/PostForm";
+import Timeline from "../container/Timeline";
 
-class Home extends Component {
+export default class Home extends Component {
   render() {
     return (
-      <fieldset className="rounded bg-secondary mt-2 py-2">
-        <h className="border mr-auto">Title</h>
-        <p className="border m-1">Content</p>
-      </fieldset>
+      <div>
+        {this.props.user && this.props.type !== "guest" ? null : (
+          <PostForm className="row fixed-position" />
+        )}
+        <Timeline className="row fixed-position" />
+      </div>
     );
   }
 }
-export default Home;

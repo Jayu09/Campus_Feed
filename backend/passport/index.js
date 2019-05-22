@@ -13,7 +13,7 @@ passport.use(
     },
     async (payload, done) => {
       try {
-        const user = await users.find({ _id: payload.sub });
+        const user = await users.find({ _id: payload.sub.userId });
         if (!user) {
           return done(null, false);
         }

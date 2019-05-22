@@ -1,15 +1,23 @@
 const events = require("../models/Event");
 module.exports = {
-  createEvent: async (res, req, done) => {
+  createEvent: async (req, res, done) => {
+    console.log(req.user);
+    var msg;
     var newEvents = new events(req.body);
     newEvents.Created_By = req.user.name;
     newEvents.AuthId = req.user._id;
+    if (req.user.Type === "admin" || req.user.Type === "SuperAdmin") {
+      newEvents.Approved = true;
+      msg = "you have created event successfully";
+    } else {
+      newEvents.Approved = false;
+      msg = "you have created event successfully, Please wait for Approvement";
+    }
     await newEvents
       .save()
       .then(st => {
         return res.json({
-          msg:
-            "you have created event successfully, Please wait for Approvement"
+          msg
         });
       })
       .catch(err => {
@@ -17,16 +25,13 @@ module.exports = {
       });
   },
   approveEvent: async (res, req, done) => {
-    if (
-      ((user.Type === "admin" && user) || user.Type === "SuperAdmin") &&
-      newAdmin.Type === "Faculty"
-    )
+    if (user.Type === "admin" || user.Type === "SuperAdmin")
       await events
         .findByIdAndUpdate(
           { _id: req.body.id },
           {
             $set: {
-              Approved: req.body.Approved
+              Approved: true
             }
           }
         )

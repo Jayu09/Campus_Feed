@@ -15,14 +15,6 @@ const Event = new schema({
     type: String,
     require: true
   },
-  Date_Time: {
-    type: Date,
-    require: true
-  },
-  Time: {
-    type: Number,
-    require: true
-  },
   venue: {
     type: String,
     require: true

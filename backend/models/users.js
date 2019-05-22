@@ -37,6 +37,10 @@ const userSchema = new schema({
   Type: {
     type: String,
     require: true
+  },
+  Verified: {
+    type: Boolean,
+    default: false
   }
 });
 userSchema.pre("save", async function(next) {

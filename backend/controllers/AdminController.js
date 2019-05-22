@@ -1,14 +1,18 @@
 const admin = require("../models/Admin");
 const users = require("../models/users");
-const events = require("../models/Event");
 module.exports = {
   addAdmin: async (req, res, done) => {
     var user = await users.findOne({ _id: req.user._id });
     var newAdmin = new admin(req.body);
+    console.log(newAdmin);
     if (
-      ((user.Type === "admin" && user) || user.Type === "SuperAdmin") &&
-      newAdmin.Type === "Admin"
+      (user.Type === "admin" && user) ||
+      user.Type === "SuperAdmin" // newAdmin.Type === "admin"
     ) {
+      await users.findOneAndUpdate(
+        { _id: req.body.Id },
+        { $set: { Verified: true } }
+      );
       await newAdmin
         .save()
         .then(st => {
@@ -17,25 +21,51 @@ module.exports = {
           });
         })
         .catch(err => {
+          console.log(err);
           return res.json({ msg: "Not valid input" });
         });
     } else {
       return res.json({ msg: "Not Authorized to add Admin" });
     }
   },
-  createEvent: async (res, req, done) => {
-    var newEvents = new events(req.body);
-    newEvents.Approved = true;
-    newEvents.Created_By = req.user.name;
-    await newEvents
-      .save()
-      .then(st => {
-        return res.json({
-          msg: "you have created event success fully"
+  deleteAdmin: async (req, res, done) => {
+    var user = await users.findOne({ _id: req.user._id });
+    if (user.Type === "admin" || user.Type === "SuperAdmin") {
+      await faculties
+        .findOneAndRemove({ Id: req.body.Id })
+        .then(st => {
+          return res.json({
+            msg: "Deleted Successfully"
+          });
+        })
+        .catch(err => {
+          return res.json({ msg: "Not valid input" });
         });
-      })
+    } else {
+      return res.json({ msg: "Not Authorized to add Faculty" });
+    }
+  },
+  editProfie: async (req, res, next) => {
+    var Admin = await admin.findOne({ Id: req.user._id });
+    await admin
+      .findOneAndUpdate(
+        { Id: req.user._id },
+        {
+          $set: {
+            image: req.file ? req.file.path : Admin.image,
+            contact: req.body.contact ? req.body.contact : Admin.contact,
+            PermanentAddress: req.body.PermanentAddress
+              ? req.body.PermanentAddress
+              : Admin.PermanentAddress,
+            LocalAddress: req.body.LocalAddress
+              ? req.body.LocalAddress
+              : Admin.LocalAddress
+          }
+        }
+      )
+      .then(res.send({ msg: "your personal information sucessfully updated" }))
       .catch(err => {
-        return res.json({ msg: "Not valid input" });
+        throw err;
       });
   }
 };

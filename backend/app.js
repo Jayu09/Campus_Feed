@@ -12,6 +12,7 @@ const faculty = require("./routes/faculty");
 const events = require("./routes/event");
 const db = require("./config/keys").URI;
 const app = express();
+const cors = require("cors");
 //database connectivity
 mongoose
   .connect(db, {
@@ -22,7 +23,16 @@ mongoose
   .catch(err => {
     throw err;
   });
+var allowCrossDomain = function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+};
 //app configuration
+app.use(cors());
+app.options("*", cors());
+app.use(allowCrossDomain);
 app.use("/images/postImages", express.static("postImages"));
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -38,12 +48,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 // handle routes
-app.use("/posts", post);
-app.use("/users", users);
-app.use("/users/admin", admin);
-app.use("/users/students", students);
-app.use("/users/faculty", faculty);
-app.use("/event", events);
+app.use("/api/posts", post);
+app.use("/api/users", users);
+app.use("/api/users/admin", admin);
+app.use("/api/users/students", students);
+app.use("/api/users/faculty", faculty);
+app.use("/api/event", events);
 //port declaration
 const Port = process.env.PORT || 3010;
 app.listen(Port);

@@ -5,8 +5,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "http-proxy-middleware": "^0.19.1",
     "jsonwebtoken": "^8.4.0",
-    "npm": "^6.8.0",
+    "npm": "^6.9.0",
     "prop-types": "^15.7.2",
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0-beta.5",
@@ -16,12 +17,14 @@
     "react-responsive-modal": "^3.6.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",
+    "react-select": "^2.4.3",
     "react-switch": "^4.1.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.0"
   },
+  "proxy": "http://localhost:3010/api/",
   "scripts": {
-    "start": "react-scripts start",
+    "start": " react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -34,5 +37,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
 }

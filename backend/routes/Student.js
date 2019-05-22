@@ -22,5 +22,17 @@ const upload = multer({
 });
 
 router.post("/addStudent", JWTStrategy, studentControllers.addStudent);
-
+router.post("/deleteStudent", JWTStrategy, studentControllers.deleteStudent);
+router.put(
+  "/editStudent",
+  upload.single("image"),
+  JWTStrategy,
+  studentControllers.editProfie
+);
+router.put(
+  "/documentSubmit",
+  upload.single("image"),
+  JWTStrategy,
+  studentControllers.addDocument
+);
 module.exports = router;

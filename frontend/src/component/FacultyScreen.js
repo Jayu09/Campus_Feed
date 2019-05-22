@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import "./App.css";
+import "../css/App.css";
+//import Component
+import Profile from "./Profile";
 //import logo
-import notification1 from "./svg/notification1.svg";
-//Component Import
-import Login from "./component/Login";
-class App extends Component {
+import notification1 from "../svg/notification1.svg";
+class FacultyScreen extends Component {
+  signout = async e => {
+    await this.props.signOut();
+  };
   render() {
     return (
       <div className="App">
@@ -49,7 +52,7 @@ class App extends Component {
                 </a>
               </li>
             </ul>
-            <ul class="form-inline list-unstyled my-2 my-lg-0">
+            <ul className="form-inline list-unstyled my-2 my-lg-0">
               <li>
                 <a className="nav-link active" href="/Profile">
                   Profile
@@ -71,7 +74,13 @@ class App extends Component {
                 </a>
               </li>
               <li>
-                <Login />
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={this.signout}
+                >
+                  Sign Out
+                </button>
               </li>
             </ul>
           </div>
@@ -117,11 +126,13 @@ class App extends Component {
               </a>
             </div>
             <div className="col-sm-8 overflow-auto">{this.props.children}</div>
-            <div className="col-sm-2 menu" />
+            <div className="col-sm-2 menu">
+              <Profile />
+            </div>
           </div>
         </div>
       </div>
     );
   }
 }
-export default App;
+export default FacultyScreen;

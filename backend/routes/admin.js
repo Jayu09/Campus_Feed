@@ -22,4 +22,6 @@ const upload = multer({
 });
 
 router.post("/addAdmin", JWTStrategy, adminControllers.addAdmin);
+router.post("/deleteAdmin", JWTStrategy, adminControllers.deleteAdmin);
+router.put("/editAdmin", JWTStrategy, adminControllers.editProfie);
 module.exports = router;

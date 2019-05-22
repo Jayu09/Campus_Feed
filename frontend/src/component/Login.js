@@ -1,90 +1,77 @@
 import React, { Component } from "react";
+import "../css/SignUp.css";
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: ""
+    };
+    this.change = this.change.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  change(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+  handleClick(e) {
+    e.preventDefault();
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.loginUser(user);
+  }
   render() {
     return (
-      <div>
-        <button
-          type="button"
-          className="btn btn-outline-primary"
-          data-toggle="modal"
-          data-target="#exampleModal"
-        >
-          SignIn
-        </button>
+      <div className="App">
+        <div className="row">
+          <div className="col-sm-4" />
+          <div className="card col-sm-4 signUp mt-5">
+            <form className="card-body ">
+              <div className="form-group">
+                {this.props.error ? (
+                  <div className="alert alert-danger">{this.props.error}</div>
+                ) : this.props.msg ? (
+                  <div className="alert alert-warning">
+                    Successfully Registered
+                    {this.resetState}
+                  </div>
+                ) : null}
+              </div>
+              <div className="form-group">
+                <label className="font-weight-bold label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  onChange={this.change}
+                  placeholder="example@email.com"
+                />
+              </div>
+              <div className="form-group">
+                <label className="font-weight-bold label">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  onChange={this.change}
+                  placeholder="password"
+                />
+              </div>
 
-        <div
-          className="modal fade"
-          id="exampleModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  SignIn
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter email"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="exampleInputPassword1"
-                      placeholder="Password"
-                    />
-                  </div>
-                  <div className="form-group form-check">
-                    <input
-                      type="checkbox"
-                      className="form-check-input"
-                      id="exampleCheck1"
-                    />
-                    <label className="form-check-label" for="exampleCheck1">
-                      Check me out
-                    </label>
-                  </div>
-                  <button type="submit" class="btn btn-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Skip Login
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </div>
-            </div>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={e => this.handleClick(e)}
+              >
+                Sign In
+              </button>
+              <a className="row" href="/Register">
+                <u>Not Registered?</u>
+              </a>
+            </form>
           </div>
+          <div className="col-sm-4" />
         </div>
       </div>
     );

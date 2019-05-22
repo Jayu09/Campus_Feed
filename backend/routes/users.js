@@ -18,5 +18,20 @@ router.post(
   passAuth,
   userController.signIn
 );
+router.get(
+  "/getAdminToVerify",
+  JWTStrategy,
+  userController.getNotVerifiedAdmin
+);
+router.get(
+  "/getFacultyToVerify",
+  JWTStrategy,
+  userController.getNotVerifiedFaculty
+);
+router.get(
+  "/getStudentToVerify",
+  JWTStrategy,
+  userController.getNotVerifiedStudent
+);
 
 module.exports = router;
